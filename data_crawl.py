@@ -1,13 +1,38 @@
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
+import time
+import json
 
-"""
+
 def get_blog_urls(tag_url_list):
-    for tag_url in tag_url_list:
-        tag_page = requests.get('https://hashnode.com'+tag_url)
-        soup = BeautifulSoup(tag_page.text, 'html.parser')
 
-"""
+    tags_and_urls_json={}
+    for tag_url in tag_url_list:
+        driver = webdriver.Chrome()
+        driver.get('https://hashnode.com'+tag_url)
+        last_height = driver.execute_script("return document.body.scrollHeight")
+        for i in range(25):
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(1)
+            new_height = driver.execute_script("return document.body.scrollHeight")
+            if new_height == last_height:
+                break
+            last_height = new_height
+
+        time.sleep(1)
+
+        post_links = [i.find('a')['href'] for i in BeautifulSoup(driver.page_source, 'html.parser').find_all(class_='mb-1 text-3xl font-semibold leading-tight tracking-tight text-brand-black dark:text-brand-grey-100')]
+        
+        tags_and_urls_json[str(tag_url)]=post_links
+
+        print(f"{len(post_links)} post link crawled for the tag {tag_url} \n")
+
+
+    with open('data.json', 'w') as fp:
+        json.dump(tags_and_urls_json, fp)    
+
+
 
 # Parse tags page of hashnode.com to get tag names
 tags_page = requests.get('https://hashnode.com/tags')
@@ -34,6 +59,5 @@ for i in tag_name_set:
 
 
 
-
-
-    
+get_blog_urls(list(tag_name_set))
+ 
