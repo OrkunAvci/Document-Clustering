@@ -23,14 +23,14 @@ def get_blog_urls(tag_url_list):
         time.sleep(1)
 
         post_links = [i.find('a')['href'] for i in BeautifulSoup(driver.page_source, 'html.parser').find_all(class_='mb-1 text-3xl font-semibold leading-tight tracking-tight text-brand-black dark:text-brand-grey-100')]
-        
-        tags_and_urls_json[str(tag_url)]=post_links
+        absolute_urls=["https://hashnode.com"+i if i.startswith("/post/") else i for i in post_links]
+        tags_and_urls_json[str(tag_url)]=absolute_urls
 
         print(f"{len(post_links)} post link crawled for the tag {tag_url} \n")
 
 
     with open('data.json', 'w') as fp:
-        json.dump(tags_and_urls_json, fp)    
+        json.dump(tags_and_urls_json, fp,indent=0)
 
 
 
