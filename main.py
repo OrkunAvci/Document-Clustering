@@ -1,6 +1,5 @@
-from process_pages import get_link_list
+import process_pages as pp
 
-urls = get_link_list("https://hashnode.com/n/javascript")
+#urls = get_link_list("https://hashnode.com/n/javascript")
 
-print(len(urls))
-print(urls)
+pp.get_text_from_url("https://orkunavci.hashnode.dev/master-google-in-3-minutes")
