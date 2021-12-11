@@ -4,18 +4,16 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import requests as req
-import nltk
 import re
 import time
 
-def get_link_list(url: str):
+def get_url_list(url: str, downs = 1600) -> list:
 	ser = Service("D:/chromedriver_win32/chromedriver.exe")
 	browser = Chrome(service = ser)
 	browser.get(url)
 	time.sleep(1)
 	body = browser.find_element(By.TAG_NAME, "body")
 
-	downs = 600     #   1 min
 	while downs :
 		body.send_keys(Keys.PAGE_DOWN)
 		time.sleep(0.1)
@@ -34,7 +32,7 @@ def get_link_list(url: str):
 	browser.close()
 	return  urls
 
-def get_text_from_url(url: str):
+def get_text_from_url(url: str) -> str:
 	page = req.get(url).text
 	soup = bs(page, "html.parser")
 
@@ -42,5 +40,4 @@ def get_text_from_url(url: str):
 	for elem in soup.find_all("p", text=True):
 		text = text + " " + elem.getText()
 
-	tokens = nltk.word_tokenize(text)
-	print(tokens)
+	return text
