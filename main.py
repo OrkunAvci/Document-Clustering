@@ -1,5 +1,6 @@
 import process_pages as pp
+import process_text as pt
+import file_manager as fm
+import os
 
-#urls = get_link_list("https://hashnode.com/n/javascript")
-
-pp.get_text_from_url("https://orkunavci.hashnode.dev/master-google-in-3-minutes")
+all_links = fm.get("_all_links")
