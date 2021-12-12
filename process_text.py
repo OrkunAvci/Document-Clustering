@@ -24,9 +24,12 @@ def frequency_table(tokens: list) -> dict:
 
 	return table
 
-def guided_frequency_table(guide: list, tokens: list) -> dict:
-	table = {word: tokens.count(word) for word in guide}
-	return table
+def guided_frequency_table(guide: dict, ft: dict) -> dict:
+	gft = guide
+	for key in gft.keys():
+		if key in ft.keys():
+			gft[key] = ft[key]
+	return gft
 
 # def encapsulate(table: dict) -> dict:
 # 	meta = {
