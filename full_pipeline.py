@@ -1,25 +1,25 @@
 import process_pages as pp
 import process_text as pt
 import file_manager as fm
-import os
 
 tags = [
-	"https://hashnode.com/n/javascript",
-	"https://hashnode.com/n/web-development",
-	"https://hashnode.com/n/reactjs",
-	"https://hashnode.com/n/python",
-	"https://hashnode.com/n/nodejs",
-	"https://hashnode.com/n/github",
-	"https://hashnode.com/n/java",
-	"https://hashnode.com/n/programming",
-	"https://hashnode.com/n/javascript/recent",
-	"https://hashnode.com/n/web-development/recent",
-	"https://hashnode.com/n/reactjs/recent",
-	"https://hashnode.com/n/python/recent",
-	"https://hashnode.com/n/nodejs/recent",
-	"https://hashnode.com/n/github/recent",
-	"https://hashnode.com/n/java/recent",
-	"https://hashnode.com/n/programming/recent"
+	# Commented out for safety and sanity.
+	# "https://hashnode.com/n/javascript",
+	# "https://hashnode.com/n/web-development",
+	# "https://hashnode.com/n/reactjs",
+	# "https://hashnode.com/n/python",
+	# "https://hashnode.com/n/nodejs",
+	# "https://hashnode.com/n/github",
+	# "https://hashnode.com/n/java",
+	# "https://hashnode.com/n/programming",
+	# "https://hashnode.com/n/javascript/recent",
+	# "https://hashnode.com/n/web-development/recent",
+	# "https://hashnode.com/n/reactjs/recent",
+	# "https://hashnode.com/n/python/recent",
+	# "https://hashnode.com/n/nodejs/recent",
+	# "https://hashnode.com/n/github/recent",
+	# "https://hashnode.com/n/java/recent",
+	# "https://hashnode.com/n/programming/recent"
 ]
 
 all_links = []
@@ -27,6 +27,8 @@ for tag in tags:
 	urls = pp.get_url_list(tag)
 	fm.save("tag_" + tag, urls)
 	all_links = all_links + urls
+
+all_links = list(set(all_links))
 
 guide = {}
 for link in all_links:
@@ -39,5 +41,13 @@ for link in all_links:
 		for key in table.keys():
 			guide[key] = 0
 
-fm.save("_all_links", all_links)
-fm.save("_guide", guide)
+guide = dict(sorted(guide.items()))
+
+if len(all_links) > 0 and len(guide) > 0:
+	fm.save("_all_links", all_links)
+	fm.save("_guide", guide)
+
+for link in all_links:
+	ft = fm.get("ft_" + link)
+	gft = pt.guided_frequency_table(guide, ft)
+	fm.save("gft_" + link, gft)
