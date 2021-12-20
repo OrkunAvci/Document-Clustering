@@ -1,6 +1,7 @@
 import process_pages as pp
 import process_text as pt
 import file_manager as fm
+from tqdm import tqdm
 
 tags = [
 	# Commented out for safety and sanity.

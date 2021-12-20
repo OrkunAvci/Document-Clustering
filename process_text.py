@@ -1,5 +1,6 @@
 import nltk
 import re
+from copy import deepcopy
 
 def tokenize(raw_text: str) -> list:
 	no_space_text = " ".join(raw_text.split())  # Remove extra spaces
@@ -25,7 +26,7 @@ def frequency_table(tokens: list) -> dict:
 	return table
 
 def guided_frequency_table(guide: dict, ft: dict) -> dict:
-	gft = guide
+	gft = deepcopy(guide)
 	for key in gft.keys():
 		if key in ft.keys():
 			gft[key] = ft[key]
