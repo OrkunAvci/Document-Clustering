@@ -2,6 +2,7 @@ import process_pages as pp
 import process_text as pt
 import file_manager as fm
 from tqdm import tqdm
+import os
 
 tags = [
 	# Commented out for safety and sanity.
@@ -60,3 +61,57 @@ for link in all_links:
 	ft = fm.get("ft_" + link)
 	gft = pt.guided_frequency_table(guide, ft)
 	fm.save("gft_" + link, gft)
+
+
+#   urls = fm.get("_all_links")
+#   guide = fm.get("_guide")
+
+#   urls_with_tags = pp.get_tags_for_urls(urls)
+#   
+#   fm.save("data_with_tags",urls_with_tags)
+
+#   tags = {
+#   	"javascript":0,
+#   	"web-development":0,
+#   	"reactjs":0,
+#   	"python":0,
+#   	"nodejs":0,
+#   	"github":0,
+#   	"java":0,
+#   	"programming":0
+#   }
+
+#   urls_with_tags = fm.get("data_with_tags")
+#   
+#   tags_with_urls={"javascript":[],
+#   	"web-development":[],
+#   	"reactjs":[],
+#   	"python":[],
+#   	"nodejs":[],
+#   	"github":[],
+#   	"java":[],
+#   	"programming":[]
+#   }
+#   
+#   for i in urls_with_tags.keys():
+#       for j in urls_with_tags[i]:
+#           if j in tags:
+#               tags_with_urls[j].append(i)
+#               tags[j]+=1
+#               print(j)
+#               break
+#   
+#   for i in tags:
+#       print(i,": ",tags[i])
+#   
+#   fm.save("tags_with_urls",tags_with_urls)
+
+#   remove_list = fm.get("bad_urls")
+#   
+#   for i in remove_list:
+#       file_name = fm.clean_up_name("raw_"+i)
+#       os.remove("./data/"+file_name)
+#       print(file_name," deleted")
+
+
+
