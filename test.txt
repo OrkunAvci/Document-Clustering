@@ -1,0 +1,84 @@
+How do I make my first React project?
+Install Node.js
+Make sure you install the LTS version, the current one might work but I myself have had issues with it. You can find the link to download Node.js right here, here.
+
+Open Your Desktop
+From your desktop, rightclick into the vast nothingness and open a terminal. Here you will write the following below to make a new folder called code.
+
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+mkdir code
+Tip. Have 1 folder for all your projects to minimize a messy desktop. Then you will navigate to the code folder with the command below.
+
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+cd code
+And now you're ready to make your first React project by using the following command below. Replace the project-name with what you desire.
+
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+npx create-react-app project-name
+This will create a new folder with the project name, and use the create-react-app template, now you're ready. Use the following command below.
+
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+cd project-name
+Then run the app with the last command.
+
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+
+COPY
+npm run start
+This will open the react-template created.
+
+What now Well now that you've created your first app, you're ready to learn how to use React! The absolute best way to learn React is to be independent and make your own projects. This tutorial playlist by NetNinja on YouTube blew me away and is great for anyone starting on React . Give it a go!
+Good luck.
